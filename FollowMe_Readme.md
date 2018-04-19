@@ -116,4 +116,4 @@ Just in terms of trying to select hyper-parameters, I would like to approach it 
 
 ### Model submission
 
-The model submission is included as the file `model.h5`.
+The model submission is included as the file `model_weights_v11`.
