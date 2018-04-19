@@ -4,8 +4,8 @@
 [//]: # (Image References)
 
 [image1]: ./imgs/Architecture.png
-[image2]: ./imgs/Loss_graph.png
-[image3]: ./imgs/Final_scores.png
+[image2]: ./imgs/Loss_graph.PNG
+[image3]: ./imgs/Final_scores.PNG
 
 ### Introduction
 
