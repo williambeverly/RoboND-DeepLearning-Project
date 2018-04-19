@@ -83,7 +83,7 @@ The hyper-parameter selection in this project performed by trial and error, over
 * 0.001 - with this value, I found that I could meet the 0.4 requirements, if I trained for 100 epochs
 * 0.005 - I tried a small increase, and found that I could meet the 0.4 requirements  with this value as well, for 100 epochs
 
-Then, I trained in AWS with gave me access to a Tesla K80 with 11Gb of memory. This halved the training time for the neural network (approximately 90 seconds per epoch) and allowed me to increase the batch size to 64 without GPU memory issues. My final hyper-parameters were as follows:
+Then, I trained in AWS with gave me access to a Tesla K80 with 11Gb of memory. This halved the training time for the neural network (approximately 80 seconds per epoch) and allowed me to increase the batch size to 64 without GPU memory issues. My final hyper-parameters were as follows:
 * epochs = 100
 * learning rate = 0.001
 * batch size = 64
