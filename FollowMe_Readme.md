@@ -33,17 +33,17 @@ The FCN is composed of an encoder and decoder. The encoder extracts feature info
 
 Pretraining, the input image is resized to 160x160x3 (HxWxD). Each layer in the encoder halves the image size, and increases the depth of the image by 32 x layer_number. I stuck with decreasing factor of 2, as it seemed reasonable and it was easy to implement with upscaling by a factor of 2 as well. The decoder has the opposite effect of upscaling the size of the image by a factor of 2, and decreasing the depth accordingly. Each decoder layer also implements two separable 2D convolutions, but this is discussed in the next section. For specifics on each layer, see the table below. `SAME` padding and `relu` activation were utilised throughout the layers, with a `softmax` activation in the output layer.
 
-| Layer           | Size       | Kernel size |   Strides  |  Upsample ratio  |
-|-----------------|------------|-------------|------------|------------------|
-| Input           | 160x160x3  |             |            |            |
-| Encoder layer 1 | 80x80x32   |   3x3       |     2      |            |
-| Encoder layer 2 | 40x40x64   |   3x3       |     2      |            |
-| Encoder layer 3 | 20x20x128  |   3x3       |     2      |            |
-| 1x1 Convolution | 20x20x256  |   1x1       |     1      |            |
-| Decoder layer 1 | 40x40x128  |   3x3       |     1      |      2     |
-| Decoder layer 2 | 80x80x64   |   3x3       |     1      |      2     |
-| Decoder layer 3 | 160x160x32 |   3x3       |     1      |      2     |
-| Output layer    | 3 classes  |   3x3       |     1      |            |
+| Layer           | Size       | Kernel size |   Strides  |  Upsample ratio  | Skip connection |
+|-----------------|------------|-------------|------------|------------------|-----------------|
+| Input           | 160x160x3  |             |            |            |       A    |
+| Encoder layer 1 | 80x80x32   |   3x3       |     2      |            |       B    |
+| Encoder layer 2 | 40x40x64   |   3x3       |     2      |            |       C    |
+| Encoder layer 3 | 20x20x128  |   3x3       |     2      |            |            |
+| 1x1 Convolution | 20x20x256  |   1x1       |     1      |            |            |
+| Decoder layer 1 | 40x40x128  |   3x3       |     1      |      2     |       C    |
+| Decoder layer 2 | 80x80x64   |   3x3       |     1      |      2     |       B    |
+| Decoder layer 3 | 160x160x32 |   3x3       |     1      |      2     |       A    |
+| Output layer    | 3 classes  |   3x3       |     1      |            |            |
 
 ### Architecture with Code
 
