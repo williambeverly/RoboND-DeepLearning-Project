@@ -27,9 +27,9 @@ The figure shows the three special techniques that FCNs utilise to go from being
 * Adding skip connections which enable the network to use multiple resolution scales from different layers
 
 The FCN is composed of an encoder and decoder. The encoder extracts feature information from an image, through convolution and the decoder upscales the encoder output to be the same size as the original image. The 1x1 enables the network to preserve spatial information, in 4D, as it replaces the 2D flattened tensor (fully connected layer). In this implementation, three skip connections are implemented as follows:
-* Input layer connected with deconvolution layer 3
-* Convolution layer 1 connected with deconvolution layer 2
-* Convolutional layer 2 connected with deconvolution layer 1
+* Input layer connected with decoder layer 3
+* Encoder layer 1 connected with decoder layer 2
+* Encoder layer 2 connected with decoder layer 1
 
 Pretraining, the input image is resized to 160x160x3 (HxWxD). Each layer in the encoder halves the image size, and increases the depth of the image by 32 x layer_number. I stuck with decreasing factor of 2, as it seemed reasonable and it was easy to implement with upscaling by a factor of 2 as well. The decoder has the opposite effect of upscaling the size of the image by a factor of 2, and decreasing the depth accordingly. Each decoder layer also implements two separable 2D convolutions, but this is discussed in the next section. For specifics on each layer, see the table below. `SAME` padding and `relu` activation were utilised throughout the layers, with a `softmax` activation in the output layer.
 
